@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code PDF Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="light-mode">
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-file-code"></i>
+                <span>CodePDF</span>
+            </div>
+            <div class="controls">
+                <button id="theme-toggle" class="icon-btn" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="https://github.com/google-deepmind/antigravity" target="_blank" class="github-link">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </header>
+
+        <main>
+            <div class="editor-area">
+                <div id="code-blocks-container">
+                    <!-- Code blocks will be injected here -->
+                </div>
+
+                <div class="add-block-area" id="drop-zone">
+                    <div class="empty-state-content">
+                        <i class="fas fa-plus-circle"></i>
+                        <h3>Add Code Snippet</h3>
+                        <p>Drag & drop .txt files here or click to add manually</p>
+                        <button id="add-block-btn" class="btn primary">Add New Block</button>
+                    </div>
+                    <input type="file" id="file-input" multiple accept=".txt,.py,.js,.html,.css,.java,.cpp,.c,.h"
+                        hidden>
+                </div>
+            </div>
+
+            <aside class="sidebar">
+                <div class="sidebar-content">
+                    <h2>Generate PDF</h2>
+                    <p>Turn your code snippets into a professional document.</p>
+
+                    <div class="settings-group" style="margin-bottom: 20px;">
+                        <label for="doc-title" style="display:block; margin-bottom: 5px; font-weight: 500;">Document
+                            Title</label>
+                        <input type="text" id="doc-title" value="Code Documentation"
+                            style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-color); color: var(--text-primary);">
+                    </div>
+
+                    <div class="settings-group">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="ai-description-toggle">
+                            <span class="slider"></span>
+                            <span class="label-text">Enable AI Descriptions</span>
+                        </label>
+                        <p class="help-text">Generate summary using AI (Simulated)</p>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="generate-btn" class="btn wow-btn">
+                            <i class="fas fa-magic"></i> Generate PDF
+                        </button>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Template for Code Block -->
+    <template id="code-block-template">
+        <div class="code-block card">
+            <div class="block-header">
+                <input type="text" class="filename-input" placeholder="Filename (e.g. main.py)" value="Untitled">
+                <div class="block-actions">
+                    <select class="language-select">
+                        <option value="Auto">Auto Detect</option>
+                        <option value="Python">Python</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="Java">Java</option>
+                        <option value="C">C</option>
+                        <option value="Cpp">C++</option>
+                        <option value="Go">Go</option>
+                        <option value="Rust">Rust</option>
+                        <option value="PHP">PHP</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="Text">Plain Text</option>
+                    </select>
+                    <button class="remove-block-btn icon-btn" title="Remove">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="block-body">
+                <textarea class="code-editor" placeholder="Paste your code here..."></textarea>
+            </div>
+            <div class="block-footer">
+                <span class="char-count">0 chars</span>
+                <button class="ai-preview-btn btn small ghost" style="display: none;">
+                    <i class="fas fa-robot"></i> View AI Desc
+                </button>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

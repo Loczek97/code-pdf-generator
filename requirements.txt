@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pygments
+weasyprint
+jinja2
+python-multipart
+requests
+python-dotenv
+google-generativeai
